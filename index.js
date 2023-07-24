@@ -60,6 +60,12 @@ async function run() {
     res.send(result)
   })
 
+  app.get('/mycollege',async(req, res)=>{
+    const result = await usersInfoCollection.find({email:req.query.email}).toArray()
+    console.log(result)
+    res.send(result)
+  })
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
