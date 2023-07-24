@@ -31,6 +31,7 @@ async function run() {
     await client.connect();
 
    const collegeCollection=client.db('bookCollegees').collection('collegelist')
+   const usersInfoCollection=client.db('bookCollegees').collection('usersInfo')
 
    
   app.get('/allColleges', async(req, res)=>{
@@ -42,6 +43,20 @@ async function run() {
     const id=req.params.id;
     const query={_id: new ObjectId(id)}
     const result= await collegeCollection.findOne(query)
+    res.send(result)
+  })
+
+  app.get('/applyForm/:id',async(req,res)=>{
+    const id=req.params.id;
+    const query={_id: new ObjectId(id)}
+    const result= await collegeCollection.findOne(query)
+    res.send(result)
+  })
+
+  app.post('/userInfo', async(req, res)=>{
+    const user=req.body;
+    console.log('new user',user)
+    const result=await usersInfoCollection.insertOne(user);
     res.send(result)
   })
 
